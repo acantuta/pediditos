@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cantidad: 1
+  costo_unit: 1
+  costo_total: 1
+  comentario: MyText
+  producto_id: 
+  pedido_id: 
+
+two:
+  cantidad: 1
+  costo_unit: 1
+  costo_total: 1
+  comentario: MyText
+  producto_id: 
+  pedido_id: 

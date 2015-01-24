@@ -1,0 +1,135 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+@import "font-awesome";
+
+$naranja: #e34737;
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+.minimum-page{
+	min-height:500px;
+	margin-top:20px;
+}
+footer{
+	background: #f6f6f6;
+	border-top: 1px solid #F0F0F0;
+	overflow: hidden;
+	padding-top:10px;
+	color:#cfcfcf;
+	font-size:15px;
+	min-height: 250px;
+	h4{
+	color:#4C4E4E;
+	font-size: .66rem;
+	padding: 1.6em 0 0;
+	margin: 0 0 .6rem;
+	}
+	ul{
+		
+		li{
+		 font-size:.82em;
+		 a{
+			color: #aaa;
+		 }
+		}
+	}
+}
+header{
+	background: url(/assets/backgrounds/mix1.jpg);
+	h1,h2,h4,h5,h3,a{
+	color:#fff;
+	}
+	padding-bottom:20px;
+	ul>li{
+	font-size:19px;
+	font-weight: 300;
+	}
+	.detalle{
+	background:rgba(44, 33, 26, 0.5);
+	}
+	.slogan{
+		margin-top:100px;
+		margin-bottom:40px;
+		font-weight: bold;
+	}
+	.pasos{
+		margin-bottom:10px;
+		font-weight: 400;
+		text-transform: uppercase;
+		color:white;
+		font-size:16px;
+	}
+}
+#promociones-principales{
+	margin-top:10px;
+}
+.padd{
+	padding:10px;
+}
+.entidad{
+	min-height:600px;
+	.producto{
+		border:solid #EBEBEB 1px;
+		padding:4px;
+		.precio{
+			font-size: 1.4em;
+		}
+	}
+}
+.lista-entidades{
+	.entidad-item{
+	  margin-top:10px;
+	  .detalle-entidad{
+	  	li{
+	  	 font-size:0.78em;
+	  	 color: #858585;
+	  	}
+	  }
+	}
+}
+
+
+//pedidos
+.pedido_temporal{
+	.cantidad{
+		font-size:0.6em;
+	}
+	hr{
+		margin:.1rem 0 .1rem;
+	}
+}
+.loader{
+	width:100%;
+	height:100%;
+	background: white;
+	text-align: center;
+	font-size: 3em;
+	color:#ccc;
+	&:after{
+	 content: 'CARGANDO...';
+	}
+}
+nav.top-bar{
+	.title-area{
+	  img{
+	  width:110px;
+	  }
+	}
+}
+//e34737

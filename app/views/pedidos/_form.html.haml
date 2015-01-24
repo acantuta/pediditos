@@ -1,0 +1,25 @@
+= form_for @pedido do |f|
+  - if @pedido.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@pedido.errors.count, "error")} prohibited this pedido from being saved:"
+      %ul
+        - @pedido.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :comentario
+    = f.text_area :comentario
+  .field
+    = f.label :direccion_entrega
+    = f.text_field :direccion_entrega
+  .field
+    = f.label :costo_total
+    = f.number_field :costo_total
+  .field
+    = f.label :usuario
+    = f.text_field :usuario
+  .field
+    = f.label :entidad
+    = f.text_field :entidad
+  .actions
+    = f.submit 'Save'

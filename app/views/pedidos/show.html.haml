@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Comentario:
+  = @pedido.comentario
+%p
+  %b Direccion entrega:
+  = @pedido.direccion_entrega
+%p
+  %b Costo total:
+  = @pedido.costo_total
+%p
+  %b Usuario:
+  = @pedido.usuario
+%p
+  %b Entidad:
+  = @pedido.entidad
+
+= link_to 'Edit', edit_pedido_path(@pedido)
+\|
+= link_to 'Back', pedidos_path

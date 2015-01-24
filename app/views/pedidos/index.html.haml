@@ -1,0 +1,39 @@
+.row.minimum-page{"ng-controller"=>"PedidosController"}
+  .large-12.columns
+    %h1.text-center Pedidos
+    %select{"ng-model"=>"estado"}
+      %option{"value" => '{{op.value}}',"ng-repeat"=>"op in [{name:'VER PEDIDOS - NO ATENDIDOS',value: 'no-atendidos'},{name: 'VER PEDIDOS - ATENDIDOS',value: 'atendidos'}]"} {{op.name}}
+    
+    %span{"ng-if"=>"pedidos.length==0"} No tiene pedidos 
+    %ul
+      .item-pedido{"ng-repeat" => "pedido in pedidos","ng-if"=>"pedido.visible!=false"}
+        %h4 
+          PEDIDO N° {{pedido.id}}
+          %small Fecha: {{pedido.created_at | date: 'dd/MM/yyyy HH:mm'}}
+        %div CLIENTE: {{pedido.usuario.nombre_completo}}
+        %div DNI: {{pedido.usuario.dni}}
+        %div TELEFONO: {{pedido.usuario.telefono}}
+
+        %table{width: '100%'}
+          %tr
+            %td.text-center PRODUCTO
+            %td.text-center CANTIDAD
+            %td.text-center COSTO
+            %td.text-center TOTAL
+          
+          %tr{"ng-repeat"=>"detalle in pedido.detallepedidos"}
+            %td {{detalle.producto.nombre}}
+            %td.text-right {{detalle.cantidad}}
+            %td.text-right {{detalle.costo_unit | moneda}}
+            %td.text-right {{detalle.costo_total | moneda}}
+          %tr
+            %td{'colspan'=>"3"}
+            %td.text-right
+              %strong {{pedido.costo_total | moneda}}
+        %div
+          Estado: 
+          %select.large-2{"ng-model"=>"pedido.estado", "ng-change"=>"cambiar_estado_pedido(pedido,pedido.estado)"}
+            %option{"ng-repeat"=>"estado in ['NUEVO','PENDIENTE','ATENDIENDO','REPARTIENDO','ATENDIDO']"}{{estado}}
+        %hr
+- content_for :javascript do
+  =javascript_include_tag :pedidos

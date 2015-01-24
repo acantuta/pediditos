@@ -1,0 +1,36 @@
+%form
+  .no-conectado{"ng-if" => "!usuario.conectado"}
+    %h1.text-center IDENTIFÍCATE
+    %div.alert-box{'ng-repeat'=>"alerta in flash","ng-class"=>"{'alert':alerta.type=='alert'}"}
+      {{alerta.message}}
+      %a.close &times;
+    .row
+      .large-12.columns
+        %label
+          ="¿Cuál es tu DNI?"
+          %input{type: :text,placeholder: 'Ingresa tu DNI',maxlength: 8,'ng-model' => 'identificacion.dni'}
+    .row{"ng-if"=>"existe_usuario"}
+      .large-12.columns
+        Existe un usuario con el DNI ingresado. 
+        %a{"href"=>"/usuarios/login"} Por favor inicie sesión aquí. 
+    .row{"ng-if" => "!existe_usuario"}
+      .large-12.columns
+        %label
+          ="¿Cuál es tu número de celular?"
+          %input{type: :text,placeholder: 'Ingresa tu número de celular',maxlength: 20,'ng-model' => 'identificacion.telefono'}
+    .row{"ng-if" => "!existe_usuario"}
+      .large-12.columns
+        %label
+          ="¿Cuál es tu nombre completo?"
+          %input{type: :text,placeholder: 'Ingresa tu nombre completo','ng-model' => 'identificacion.nombre_completo'}
+    .row{"ng-if" => "!existe_usuario"}
+      .large-12.columns
+        %label 
+          ="Hemos enviado una clave a su celular."
+          %input{type: "password",placeholder: 'Ingrese su clave',"ng-model"=>"identificacion.password"}
+        ="¿No has recibido tu clave?"
+        %a{"ng-click"=>"enviar_sms()"} "ENVIARME OTRA VEZ"
+    
+  .row{"ng-if" => "!existe_usuario"}
+    .large-12.columns
+      %input.button.expand{"ng-disabled"=>"!submit_habilitado","ng-click"=>"realizar_pedido()",type: :submit,value: "HACER PEDIDO AHORA"}

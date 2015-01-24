@@ -1,0 +1,59 @@
+#confirmacion-pedido.reveal-modal{"data-reveal"=>true}
+  .row.ng-view
+  %a.close-reveal-modal &#215;
+.entidad{"ng-controller"=>"EntidadesController","ng-init"=>"entidad_id='#{@entidad.id}'"}
+  .row
+    .large-2.columns
+      %img.th.left{src: @entidad.avatar.url(:thumb)}
+    .large-10.columns
+      %h2=@entidad.nombre
+      %p=@entidad.descripcion
+      %ul.inline-list
+        %li
+          ="Pedido mínimo: {{#{@entidad.pedido_minimo} | moneda}}"
+        %li
+          ="Costo de envío: {{#{@entidad.costo_delivery} | moneda }}"
+  .row
+    .large-8.columns
+      %ul.large-block-grid-2
+        %li.producto{"ng-repeat" => "producto in entidad.productos"}
+          %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
+          %h4 {{producto.nombre}}
+          %p {{producto.descripcion}}
+          %div
+            %button.right.tiny{"ng-click"=>"agregar_producto(producto)"} + agregar pedido
+    .large-4.columns
+      .pedido_temporal.panel        
+        %h3 MI PEDIDO
+        %ul.no-bullet
+          %li{"ng-repeat"=>"detalle in pedido.detalles"}
+            %div 
+              .row
+                .large-12.columns
+                  %span.right{"ng-click"=>"quitar_producto(detalle)"}=fa_icon 'close'
+                  %span {{detalle.nombre}}
+              .row
+                .large-6.columns
+                  .row.collapse
+                    .small-6.columns
+                      %span.prefix.cantidad
+                        cantidad
+                    .small-6.columns
+                      %input.cantidad.small{"ng-change" => "cambio_cantidad(detalle);","type"=>"number","ng-model"=>"detalle.cantidad",size: 2}
+
+                .large-6.columns
+                  %span.right {{detalle.total | moneda}}
+            %hr
+        .total
+          %span.right total: {{pedido.costo_total | moneda}}
+        .clearfix
+        %label
+          Dirección de entrega:
+          %input{'ng-model'=>'pedido.direccion_entrega',type: 'text',placeholder: "Dirección de entrega."}
+        %textarea{placeholder: "Comentarios sobre mi pedido","ng-model"=>"pedido.comentario"}
+        %button.button.success.expand{"data-reveal-id"=>"confirmacion-pedido","ng-disabled"=>"pedido.detalles.length==0","ng-click"=>"confirmar_pedido();"} Hacer Pedido
+  .row
+    - if @usuario and @entidad.usuario_puede_editar?(@usuario)
+      =link_to "+ Agregar producto",new_producto_path(producto: {entidad_id: @entidad.id})
+- content_for :javascript do
+  =javascript_include_tag :entidades

@@ -1,0 +1,10 @@
+# Location: config/redis.yml
+development:
+  url: redis://127.0.0.1:6379/0
+test:
+  url: redis://127.0.0.1:6379/15
+production:
+  host: <%= ENV['APP_REDIS_HOST']%>
+  port: <%= ENV['APP_REDIS_PORT']%>
+  password: <%= ENV['APP_REDIS_PASSWORD']%>
+  db: 0

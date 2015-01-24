@@ -1,0 +1,13 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @categoriaentidad.nombre
+%p
+  %b Descripcion:
+  = @categoriaentidad.descripcion
+- @categoriaentidad.entidades.each do |entidad|
+  = entidad.nombre
+.row
+  = link_to 'Edit', edit_categoriaentidad_path(@categoriaentidad)
+  = link_to 'Back', categoriaentidades_path

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Nombre:
+  = @producto.nombre
+%p
+  %b Descripcion:
+  = @producto.descripcion
+%p
+  %b Precio:
+  = @producto.precio
+%p
+  %b Entidad:
+  = @producto.entidad
+
+= link_to 'Edit', edit_producto_path(@producto)
+\|
+= link_to 'Back', productos_path

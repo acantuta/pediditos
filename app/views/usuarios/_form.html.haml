@@ -1,0 +1,31 @@
+= form_for @usu do |f|
+  - if @usu.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@usuario.errors.count, "error")} prohibited this usuario from being saved:"
+      %ul
+        - @usu.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :nombre_completo
+    = f.text_field :nombre_completo
+  .field
+    = f.label :dni
+    = f.text_field :dni
+  .field
+    = f.label :telefono
+    = f.text_field :telefono
+  .field
+    = f.label :direccion
+    = f.text_field :direccion
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :entidad
+    = f.collection_select :entidad_id, Entidad.all,:id,:nombre,:include_blank=>true
+  .actions
+    = f.submit 'Guardar',{class: 'button'}

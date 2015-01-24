@@ -1,0 +1,7 @@
+.row
+  .large-12.columns
+    %h1.text-center Recordar clave
+    =form_for :usuarios,:url => '/usuarios/recordar-clave' do |f|
+      =label_tag :DNI
+      =text_field_tag(:dni,nil,{:placeholder => 'Ingrese su DNI'})
+      =submit_tag("Recordar clave",{'class' => 'button'})

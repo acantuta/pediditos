@@ -1,0 +1,31 @@
+.row.minimum-page
+  .large-12.columns
+    %h1.text-center Usuarios
+
+    %table.table{width: '100%'}
+      %thead
+        %tr
+          %th Nombre completo
+          %th Dni
+          %th Telefono
+          %th Direccion
+          %th Email
+          %th
+          %th
+          %th
+          
+      %tbody
+        - @usuarios.each do |usuario|
+          %tr
+            %td= usuario.nombre_completo
+            %td= usuario.dni
+            %td= usuario.telefono
+            %td= usuario.direccion
+            %td= usuario.email
+            %td= link_to 'Mostrar', usuario
+            %td= link_to 'Editar', edit_usuario_path(usuario)
+            %td= link_to 'Eliminar', usuario, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    %br
+
+    = link_to 'Nuevo Usuario', new_usuario_path,{class: 'button'}

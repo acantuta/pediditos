@@ -1,0 +1,14 @@
+.row.minimum-page
+  %h1 ADMINISTRACIÓN
+  %ul
+    %li
+      %span CATEGORIAS
+      %ul
+        %li
+          =link_to "VER TODAS",:categoriaentidades
+        %li
+          =link_to :NUEVA,new_categoriaentidad_path
+    %li
+      =link_to :ENTIDADES,:entidades
+    %li
+      =link_to :PEDIDOS,:pedidos

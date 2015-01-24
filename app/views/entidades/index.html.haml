@@ -1,0 +1,32 @@
+.row.minimum-page
+  .large-12.columns
+    .columns.large-12
+      %h1.text-center 
+        =fa_icon "cutlery"
+        Restaurantes
+      %hr
+    .columns.large-12
+    .lista-entidades
+      - @entidades.each do |entidad|
+        .row.entidad-item
+          .large-2.columns
+            %a.th.left
+              %img{:src=>entidad.avatar.url(:square)}
+          .large-7.columns
+            %h3=link_to entidad.nombre,entidad
+            %p=entidad.descripcion
+            .detalle-entidad
+              %ul.inline-list
+                %li
+                  Costo delivery
+                  =moneda(entidad.costo_delivery)
+                %li
+                  Monto mínimo del pedido
+                  =moneda(entidad.pedido_minimo)
+          .large-3.columns
+            =link_to "Pedir ahora",entidad,{class: "button warning radius"}
+        - if @usuario and entidad.usuario_puede_editar?(@usuario)
+          .row
+            .large-12.columns              
+              =link_to 'Editar',edit_entidad_path(entidad)
+        %hr

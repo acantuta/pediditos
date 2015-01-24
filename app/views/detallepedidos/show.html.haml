@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Cantidad:
+  = @detallepedido.cantidad
+%p
+  %b Costo unit:
+  = @detallepedido.costo_unit
+%p
+  %b Costo total:
+  = @detallepedido.costo_total
+%p
+  %b Comentario:
+  = @detallepedido.comentario
+%p
+  %b Producto:
+  = @detallepedido.producto
+%p
+  %b Pedido:
+  = @detallepedido.pedido
+
+= link_to 'Edit', edit_detallepedido_path(@detallepedido)
+\|
+= link_to 'Back', detallepedidos_path

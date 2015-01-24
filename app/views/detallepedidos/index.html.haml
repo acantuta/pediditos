@@ -1,0 +1,31 @@
+%h1 Listing detallepedidos
+
+%table
+  %thead
+    %tr
+      %th Cantidad
+      %th Costo unit
+      %th Costo total
+      %th Comentario
+      %th Producto
+      %th Pedido
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @detallepedidos.each do |detallepedido|
+      %tr
+        %td= detallepedido.cantidad
+        %td= detallepedido.costo_unit
+        %td= detallepedido.costo_total
+        %td= detallepedido.comentario
+        %td= detallepedido.producto
+        %td= detallepedido.pedido
+        %td= link_to 'Show', detallepedido
+        %td= link_to 'Edit', edit_detallepedido_path(detallepedido)
+        %td= link_to 'Destroy', detallepedido, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Detallepedido', new_detallepedido_path

@@ -1,0 +1,27 @@
+.row.minimum-page
+  .large-12.columns
+    %h1.text-center Mis pedidos
+    %ul.large-block-grid-2
+      - @pedidos.each do |pedido|
+        %li
+          %h4="Pedido N°#{pedido.id}"
+          %h6="Estado: #{pedido.estado}"
+          %table
+            %tr
+              %td PRODUCTO
+              %td CANT
+              %td COSTO
+              %td TOTAL
+            -pedido.detallepedidos.each do |detalle| 
+              %tr
+                %td=detalle.producto.nombre
+                %td.text-right=detalle.cantidad
+                %td.text-right=moneda(detalle.costo_unit)
+                %td.text-right=moneda(detalle.costo_total)
+            %tr
+              %td{colspan:3}
+              %td
+                %strong=moneda(pedido.costo_total)
+          %hr
+
+

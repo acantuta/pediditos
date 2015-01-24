@@ -1,0 +1,23 @@
+.row.minimum-page
+  .large-12.columns
+    %p#notice= notice
+
+    %p
+      %b Nombre completo:
+      = @usuario.nombre_completo
+    %p
+      %b Dni:
+      = @usuario.dni
+    %p
+      %b Telefono:
+      = @usuario.telefono
+    %p
+      %b Direccion:
+      = @usuario.direccion
+    %p
+      %b Email:
+      = @usuario.email
+
+    = link_to 'Edit', edit_usuario_path(@usuario)
+    \|
+    = link_to 'Back', usuarios_path

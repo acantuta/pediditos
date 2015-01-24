@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comentario: MyText
+  direccion_entrega: MyString
+  costo_total: 1
+  usuario_id: 
+  entidad_id: 
+
+two:
+  comentario: MyText
+  direccion_entrega: MyString
+  costo_total: 1
+  usuario_id: 
+  entidad_id: 

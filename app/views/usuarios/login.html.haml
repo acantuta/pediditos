@@ -1,0 +1,12 @@
+.row.minimum-page
+  .large-12.columns
+    %h1.text-center Ingresar
+      
+    = form_tag ("/usuarios/autenticar") do
+      = label_tag 'DNI:'
+      = text_field_tag(:dni)
+      = label_tag 'CLAVE:'
+      = password_field_tag(:clave)
+      = submit_tag "Ingresar",{class: 'button'}
+    .clearfix
+    %a.text-right{href: '/usuarios/recordar-clave'} ¿Olvidaste tu clave?

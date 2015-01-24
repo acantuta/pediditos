@@ -1,0 +1,24 @@
+.row.minimum-page
+  .large-12.columns
+    %h1.text-center Categorías de restaurantes
+    %table{width:'100%'}
+      %thead
+        %tr
+          %th Nombre
+          %th Descripcion
+          %th
+          %th
+          %th
+          
+      %tbody
+        - @categoriaentidades.each do |categoriaentidad|
+          %tr
+            %td= categoriaentidad.nombre
+            %td= categoriaentidad.descripcion
+            %td= link_to 'Mostrar', categoriaentidad
+            %td= link_to 'Editar', edit_categoriaentidad_path(categoriaentidad)
+            %td= link_to 'Eliminar', categoriaentidad, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    %br
+
+    = link_to 'Nueva Categoria', new_categoriaentidad_path,{:class => 'button'}
