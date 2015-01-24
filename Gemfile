@@ -44,7 +44,6 @@ group :development, :test do
 end
 
 gem "paranoia", "~> 2.0"
-gem "paperclip", "~> 4.2"
 gem "haml-rails"
 gem 'foundation-rails'
 gem "font-awesome-rails"
@@ -54,3 +53,4 @@ gem 'angularjs-rails'
 gem 'redis-objects'
 gem "paperclip", "~> 4.2"
 gem 'aws-sdk'
+gem 'rails_12factor', group: :production
