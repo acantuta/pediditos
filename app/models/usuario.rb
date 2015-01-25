@@ -49,7 +49,7 @@ class Usuario < ActiveRecord::Base
 	end
 
 	def pedidos_no_atendidos		
-		if self.pedidos_no_atendidos_cache.value
+		if self.pedidos_no_atendidos_cache and self.pedidos_no_atendidos_cache.value
 			return self.pedidos_no_atendidos_cache 
 		else 
 			return 0

@@ -51,7 +51,7 @@ footer{
 	}
 }
 header{
-	background: url(/assets/backgrounds/mix1.jpg);
+	background: url(asset-path('backgrounds/mix1.jpg'));
 	h1,h2,h4,h5,h3,a{
 	color:#fff;
 	}
