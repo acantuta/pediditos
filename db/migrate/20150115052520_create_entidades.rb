@@ -3,7 +3,7 @@ class CreateEntidades < ActiveRecord::Migration
     create_table :entidades do |t|
       t.string :nombre
       t.text :descripcion
-      t.integer :tiempo_envio_aprox
+      t.string :tiempo_envio_aprox
       t.integer :costo_delivery
       t.integer :pedido_minimo
 
