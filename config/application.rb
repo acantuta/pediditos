@@ -28,7 +28,7 @@ module Pediditos
     config.sms_auth_token = ENV["SMS_AUTH_TOKEN"]
     config.sms_src_number = ENV['SMS_SRC_NUMBER']
     config.sms_prefix = ENV['SMS_PREFIX']
-    config.nombre_sitio = "ENV['NOMBRE_SITIO']"
+    config.nombre_sitio = ENV['NOMBRE_SITIO']
     config.usuario_id_admin = '1'
     config.sms_habilitado = true
     config.paperclip_defaults = {
