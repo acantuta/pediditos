@@ -3,26 +3,27 @@
   %a.close-reveal-modal &#215;
 .entidad{"ng-controller"=>"EntidadesController","ng-init"=>"entidad_id='#{@entidad.id}'"}
   .row
-    .large-2.columns
-      %img.th.left{src: @entidad.avatar.url(:thumb)}
+    .large-2.columns.text-center
+      %img.th{src: @entidad.avatar.url(:thumb)}
     .large-10.columns
-      %h2=@entidad.nombre
+      %h1.nombre=@entidad.nombre
       %p=@entidad.descripcion
-      %ul.inline-list
+      %ul.atributos.inline-list
         %li
-          ="Pedido mínimo: {{#{@entidad.pedido_minimo} | moneda}}"
+          .fa.fa-money="Pedido mínimo: {{#{@entidad.pedido_minimo} | moneda}}"
         %li
-          ="Costo de envío: {{#{@entidad.costo_delivery} | moneda }}"
+          .fa.fa-truck="Costo de envío: {{#{@entidad.costo_delivery} | moneda }}"
   .row
     .large-8.columns
+      %h2 La carta
       %ul.large-block-grid-2
         %li.producto{"ng-repeat" => "producto in entidad.productos"}
           %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
-          %h4 {{producto.nombre}}
+          %span {{producto.nombre}}
           %p.descripcion {{producto.descripcion}}
           .clearfix
           %div
-            %button.tiny{"ng-click"=>"agregar_producto(producto)"} + AGREGAR A PEDIDO
+            %button.small{"ng-click"=>"agregar_producto(producto)"} + AGREGAR A PEDIDO
           .clearfix
           - if @usuario and (@usuario.es_admin? or @entidad.usuario_puede_editar?(@usuario))
             .opciones
@@ -32,7 +33,7 @@
 
     .large-4.columns
       .pedido_temporal.panel        
-        %h3 MI PEDIDO
+        %h2 Mi pedido
         %ul.no-bullet
           %li{"ng-repeat"=>"detalle in pedido.detalles"}
             %div 

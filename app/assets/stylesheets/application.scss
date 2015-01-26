@@ -18,6 +18,8 @@
 @import "font-awesome";
 
 $naranja: #e34737;
+ $silver : #A3A3A3;
+
 body{
 	font-family: 'Roboto', sans-serif;
 }
@@ -84,6 +86,15 @@ header{
 }
 .entidad{
 	min-height:600px;
+	.nombre{
+
+	}
+	.atributos{
+		
+	}
+	&.inline-list{
+	display:compact;
+	}
 	.producto{
 		border:solid #EBEBEB 1px;
 		padding:4px;
@@ -94,7 +105,9 @@ header{
 		  min-height:30px;
 		  text-overflow:ellipsis;
 		  white-space:nowrap; 
-		  overflow:hidden; 
+		  overflow:hidden;
+		  color:#757575;
+		  font-size:0.9em;
 		}
 	}
 }
