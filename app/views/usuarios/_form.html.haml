@@ -24,8 +24,9 @@
   .field
     = f.label :password
     = f.password_field :password
-  .field
-    = f.label :entidad
-    = f.collection_select :entidad_id, Entidad.all,:id,:nombre,:include_blank=>true
+  - if @usuario and @usuario.es_admin?
+    .field
+      = f.label :entidad
+      = f.collection_select :entidad_id, Entidad.all,:id,:nombre,:include_blank=>true
   .actions
     = f.submit 'Guardar',{class: 'button'}
