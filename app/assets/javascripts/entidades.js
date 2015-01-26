@@ -65,10 +65,10 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
   }
 
   $scope.cambio_cantidad = function(producto){
-    if(producto.cantidad>0){
+    if(producto.cantidad>=0){
       $scope.calcular_total_pedido();  
     }else{
-      producto.cantidad = 1;
+      producto.cantidad = 0;
       $scope.calcular_total_pedido(); 
     }
   }

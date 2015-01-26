@@ -2,7 +2,8 @@
 %html
   %head
     %meta{:charset => "utf-8"}
-    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"}
+
     %title Comida,bebidas,dulces,restaurantes - Moquegua delivery
     =stylesheet_link_tag "application"
     =stylesheet_link_tag"http://fonts.googleapis.com/css?family=Roboto:300,700,500italic,900,300italic,400italic,900italic,100italic,100,500,400,700italic"
@@ -19,9 +20,11 @@
             %a.left-off-canvas-toggle.menu-icon
               %span
           %section.middle.tab-bar-section
-            %h1.title=@nombre_sitio.upcase
+            %h1.title
+              =image_tag "logo.svg",{class: "logo"}
         %aside.left-off-canvas-menu.show-for-small-only
           %ul.off-canvas-list
+            %li= link_to "Inicio",'/'
             - if @usuario
               %li
                 %label MI CUENTA
@@ -74,16 +77,21 @@
                       %a
                         %strong MI CUENTA
                     %li
+                      =link_to "Información", edit_usuario_path(@usuario)
+                    %li
                       =link_to "Mis pedidos", '/yo/mis-pedidos'
                     - if @usuario.tiene_entidad?
                       %li
+                        %a
+                          %strong MI RESTAURANTE
+                      %li
                         %a{href: '/pedidos'}
-                          %strong PEDIDOS RECIBIDOS
+                          Pedidos recibidos
                     %li
                       =link_to :Salir,'/usuarios/salir'
               - if not @usuario
                 %li
-                  =link_to 'Ingresar','/usuarios/login'
+                  =link_to 'INGRESAR','/usuarios/login'
         =yield
         =render "default/footer"
     

@@ -90,6 +90,12 @@ header{
 		.precio{
 			font-size: 1.4em;
 		}
+		.descripcion{
+		  min-height:50px;
+		  text-overflow:ellipsis;
+		  white-space:nowrap; 
+		  overflow:hidden; 
+		}
 	}
 }
 .lista-entidades{
@@ -109,6 +115,9 @@ header{
 .pedido_temporal{
 	.cantidad{
 		font-size:0.6em;
+	}
+	.nombre{
+	text-decoration: underline;
 	}
 	hr{
 		margin:.1rem 0 .1rem;
@@ -132,4 +141,11 @@ nav.top-bar{
 	  }
 	}
 }
-//e34737
+//barra top cuando es mobile
+nav.tab-bar{
+	section.middle{
+	  .logo{
+	  width:110px;
+	  }
+	}
+}

@@ -1,8 +1,9 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
   
-  before_action :solo_usuario, except: [:login,:autenticar,:enviar_sms,:salir,:recordar_clave,:existe_usuario]
-
+  before_action :solo_admin, except: [:edit,:login,:autenticar,:enviar_sms,:salir,:recordar_clave,:existe_usuario]
+  
+  before_action :solo_usuario_propio, only: [:edit]
 
   # GET /usuarios
   # GET /usuarios.json
@@ -151,5 +152,13 @@ class UsuariosController < ApplicationController
       params.require(:usuario).permit(:dni,:telefono)
     end
 
-    
+    def solo_usuario_propio
+      if not ((@usu.id == @usuario.id) or @usuario.es_admin?)
+        if params[:format] != 'html'
+          render text: 'Sin autorización',:status => :unautorized
+        else
+          redirect_to "/usuarios/login"
+        end
+      end
+    end
 end

@@ -1,7 +1,5 @@
-%h1 Editing producto
-
-= render 'form'
-
-= link_to 'Show', @producto
-\|
-= link_to 'Back', productos_path
+.row
+  .large-12.columns
+    %h1 Editar producto
+    = render 'form'
+    = link_to 'Atras', entidad_path(@producto.entidad_id)
