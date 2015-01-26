@@ -1,9 +1,9 @@
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
+  before_action :solo_usuario_propio, only: [:edit,:update]
+  before_action :solo_admin, except: [:edit,:update,:login,:autenticar,:enviar_sms,:salir,:recordar_clave,:existe_usuario]
   
-  before_action :solo_admin, except: [:edit,:login,:autenticar,:enviar_sms,:salir,:recordar_clave,:existe_usuario]
   
-  before_action :solo_usuario_propio, only: [:edit]
 
   # GET /usuarios
   # GET /usuarios.json
