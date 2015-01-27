@@ -34,7 +34,7 @@
         %div
           Estado: 
           %select.large-2{"ng-model"=>"pedido.estado", "ng-change"=>"cambiar_estado_pedido(pedido,pedido.estado)"}
-            %option{"ng-repeat"=>"estado in ['NUEVO','PENDIENTE','ATENDIENDO','REPARTIENDO','ATENDIDO']"}{{estado}}
+            %option{"ng-repeat"=>"estado in ['NUEVO','PENDIENTE','ATENDIENDO','REPARTIENDO','ATENDIDO','ANULADO']"}{{estado}}
         %hr
 - content_for :javascript do
   =javascript_include_tag :pedidos
