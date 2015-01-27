@@ -1,6 +1,6 @@
 class EntidadesController < ApplicationController
   before_action :set_entidad, only: [:show, :edit, :update, :destroy]
-  before_action :solo_admin, only: [:edit,:update]
+  before_action :solo_usuario_propio_or_admin, only: [:edit,:update]
   # GET /entidades
   # GET /entidades.json
   def index

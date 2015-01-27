@@ -42,7 +42,7 @@ class ProductosController < ApplicationController
   def update
     respond_to do |format|
       if @producto.update(producto_params)
-        format.html { redirect_to @producto, notice: 'Producto was successfully updated.' }
+        format.html { redirect_to entidad_path(@producto.entidad_id), notice: 'Producto was successfully updated.' }
         format.json { render :show, status: :ok, location: @producto }
       else
         format.html { render :edit }
