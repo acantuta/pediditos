@@ -4,7 +4,7 @@
     %meta{:charset => "utf-8"}
     %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"}
 
-    %title Comida,bebidas,dulces,restaurantes - Moquegua delivery
+    %title="#{Rails.application.config.titulo_principal}"
     =stylesheet_link_tag "application"
     =stylesheet_link_tag"http://fonts.googleapis.com/css?family=Roboto:300,700,500italic,900,300italic,400italic,900italic,100italic,100,500,400,700italic"
     
@@ -26,18 +26,41 @@
           %ul.off-canvas-list
             %li= link_to "Inicio",'/'
             - if @usuario
-              %li
-                %label MI CUENTA
-              - if @usuario.tiene_entidad?
+              - if @usuario and @usuario.es_admin?
                 %li
-                  %a{"href"=>"/pedidos"} Pedidos recibidos
+                  %a
+                    %strong ADMIN
+                %li
+                  =link_to :Categorias,categoriaentidades_path
+                %li
+                  =link_to :Usuarios,usuarios_path
+                %li
+                  =link_to :Pedidos,pedidos_path
+                %li
+                  =link_to "Nuevo Restaurante",new_entidad_path
               %li
-                %a{"href"=>"/yo/mis-pedidos"} Mis pedidos
+                %a
+                  %strong MI CUENTA
               %li
-                %a{"href"=>"/usuarios/salir"} Salir
-            - else
+                =link_to "Información", edit_usuario_path(@usuario)
               %li
-                =link_to "Ingresar como usuario",login_usuarios_path
+                =link_to "Mis pedidos", '/yo/mis-pedidos'
+              - if @usuario and @usuario.tiene_entidad?
+                %li
+                  %a
+                    %strong MI RESTAURANTE
+                %li
+                  =link_to "Información", edit_entidad_path(@usuario.entidad_id)
+                %li
+                  %a{href: '/pedidos'}
+                    Pedidos recibidos
+                %li
+                  =link_to "Agregar producto",new_producto_path(producto: {entidad_id: @usuario.entidad_id})
+              %li
+                =link_to :Salir,'/usuarios/salir'
+            - if not @usuario
+              %li
+                =link_to 'INGRESAR','/usuarios/login'
       
         %nav.top-bar.show-for-medium-up{"data-topbar"=>true,"ng-controller"=>"Topbar"}
           %ul.title-area
@@ -85,8 +108,13 @@
                         %a
                           %strong MI RESTAURANTE
                       %li
+                        =link_to "Información", edit_entidad_path(@usuario.entidad_id)
+                      %li
                         %a{href: '/pedidos'}
                           Pedidos recibidos
+                      %li
+                        =link_to "Agregar producto",new_producto_path(producto: {entidad_id: @usuario.entidad_id})
+                      
                     %li
                       =link_to :Salir,'/usuarios/salir'
               - if not @usuario
@@ -94,7 +122,8 @@
                   =link_to 'INGRESAR','/usuarios/login'
         =yield
         =render "default/footer"
-    
+    =render 'default/analytics'
+    =render 'default/chat'
     = javascript_include_tag "application"
     =content_for :javascript
     
