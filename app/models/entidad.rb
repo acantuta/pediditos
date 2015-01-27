@@ -8,6 +8,8 @@ class Entidad < ActiveRecord::Base
 	    medium: '300x300>'
   	},:default_url => Rails.application.config.default_entidad_image
 
+  	 default_scope{order(updated_at: :desc)}
+
   	# Validate the attached image is image/jpg, image/png, etc
   	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
