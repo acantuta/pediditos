@@ -40,6 +40,9 @@ module Pediditos
       }
     }
     config.default_entidad_image = "/assets/avatar-not-found.png"
+    config.domain = ENV['DOMAIN'] || 'moqueguadelivery.com'
+    config.url_registro_entidad = ENV['URL_REG_ENTIDAD'] || 'moqueguadelivery.com'
+    config.titulo_principal = ENV['TITULO_PRINCIPAL'] || 'Comida, bebidas, dulces, restaurantes - Moquegua delivery'
   end
 end
 
