@@ -16,7 +16,7 @@
   .row
     .large-8.columns
       %h2 La carta
-      %ul.large-block-grid-2
+      %ul.large-block-grid-2.medium-block-grid-2.small-block-grid-1
         %li.producto{"ng-repeat" => "producto in entidad.productos","ng-if"=>"producto.visible!=false"}
           %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
           %span {{producto.nombre}}
