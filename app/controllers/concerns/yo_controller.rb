@@ -1,6 +1,6 @@
 class YoController < ApplicationController
 	before_action :solo_usuario
-	before_action :solo_usuario_entidad
+	before_action :solo_usuario_entidad, only: [:mis_pedidos_recibidos]
 	def index
 		respond_to do |format|
 			format.html
