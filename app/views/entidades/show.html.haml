@@ -17,7 +17,7 @@
     .large-8.columns
       %h2 La carta
       %ul.large-block-grid-2
-        %li.producto{"ng-repeat" => "producto in entidad.productos"}
+        %li.producto{"ng-repeat" => "producto in entidad.productos","ng-if"=>"producto.visible!=false"}
           %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
           %span {{producto.nombre}}
           %p.descripcion {{producto.descripcion}}
@@ -27,7 +27,8 @@
           .clearfix
           - if @usuario and (@usuario.es_admin? or @entidad.usuario_puede_editar?(@usuario))
             .opciones
-              %a{href: "/productos/{{producto.id}}/edit"} Editar
+              %a{href: "/productos/{{producto.id}}/edit"} [Editar]
+              %a{"ng-click"=>"eliminar_producto(producto)"} [Eliminar]
       - if @usuario and @entidad.usuario_puede_editar?(@usuario)
         =link_to "+ Agregar producto",new_producto_path(producto: {entidad_id: @entidad.id})
 
