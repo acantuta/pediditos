@@ -77,4 +77,14 @@ class EntidadesController < ApplicationController
     def entidad_params
       params.require(:entidad).permit(:nombre, :descripcion, :tiempo_envio_aprox, :costo_delivery, :pedido_minimo,:categoriaentidad_id,:avatar)
     end
+
+    def solo_usuario_propio_or_admin
+      if not ((@entidad.id == @usuario.entidad_id) or @usuario.es_admin?)
+        if params[:format] != 'html'
+          render text: 'Sin autorización',:status => :unautorized
+        else
+          redirect_to "/usuarios/login"
+        end
+      end
+    end
 end
