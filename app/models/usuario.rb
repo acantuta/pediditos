@@ -62,7 +62,7 @@ class Usuario < ActiveRecord::Base
 	end
 
 	def tiene_entidad?
-		(not self.id.blank?)
+		(not self.entidad_id.blank?)
 	end
 
 	def self.generar_clave
