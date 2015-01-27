@@ -24,7 +24,7 @@
               =image_tag "logo.svg",{class: "logo"}
         %aside.left-off-canvas-menu.show-for-small-only
           %ul.off-canvas-list
-            %li= link_to "Inicio",'/'
+            %li= link_to "INICIO",'/'
             - if @usuario
               - if @usuario and @usuario.es_admin?
                 %li
@@ -47,7 +47,7 @@
                 =link_to "Mis pedidos", '/yo/mis-pedidos'
               - if @usuario and @usuario.tiene_entidad?
                 %li
-                  %a
+                  %a{"href"=>entidad_path(@usuario.entidad_id)}
                     %strong MI RESTAURANTE
                 %li
                   =link_to "Información", edit_entidad_path(@usuario.entidad_id)
