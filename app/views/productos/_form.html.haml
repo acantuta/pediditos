@@ -1,19 +1,22 @@
-= form_for @producto do |f|
-  - if @producto.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@producto.errors.count, "error")} prohibited this producto from being saved:"
-      %ul
-        - @producto.errors.full_messages.each do |msg|
-          %li= msg
-  = f.hidden_field :entidad_id
-  .field
-    = f.label :nombre
-    = f.text_field :nombre
-  .field
-    = f.label :descripcion
-    = f.text_area :descripcion,{maxlength: 200}
-  .field
-    = f.label :precio
-    = f.number_field :precio
-  .actions
-    = f.submit 'Guardar',{class: "button"}
+.form-producto
+  = form_for @producto do |f|
+    - if @producto.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@producto.errors.count, "error")} prohibited this producto from being saved:"
+        %ul
+          - @producto.errors.full_messages.each do |msg|
+            %li= msg
+    = f.hidden_field :entidad_id
+    .field
+      = f.label :nombre
+      = f.text_field :nombre
+    .field
+      = f.label :descripcion
+      = f.text_area :descripcion,{maxlength: 200}
+    .field
+      = f.hidden_field :precio
+    .field
+      = f.label :precio
+      = number_field_tag :producto_precio_mascara,@producto.precio_mascara
+    .actions
+      = f.submit 'Guardar',{class: "button"}

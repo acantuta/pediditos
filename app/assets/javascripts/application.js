@@ -15,6 +15,7 @@
 //= require angular
 //= require angular-route
 //= require foundation
+//= require productos
 
 
 

@@ -4,4 +4,8 @@ class Producto < ActiveRecord::Base
   validates :descripcion, length: {maximum: 200},allow_blank: true
 
   acts_as_paranoid
+
+  def precio_mascara
+  	self.precio/100.00
+  end
 end

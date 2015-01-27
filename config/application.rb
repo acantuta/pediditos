@@ -21,7 +21,7 @@ module Pediditos
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.assets.precompile += %w( entidades.js pedidos.js)
+    config.assets.precompile += %w( entidades.js pedidos.js productos.js)
     config.active_record.raise_in_transactional_callbacks = true
     config.sms_api = ENV["SMS_API"]
     config.sms_auth_id = ENV["SMS_AUTH_ID"]
