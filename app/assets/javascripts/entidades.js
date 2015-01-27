@@ -77,5 +77,17 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
     $location.path("/pedidos/confirmacion");
   }
 
+  $scope.eliminar_producto = function(producto){
+    if(confirm("¿ Estás seguro de eliminarlo ?")){
+      $http({
+        method: "delete",
+        url: "/productos/" + producto.id + ".json"
+      }).success(function(){
+        producto.visible = false;
+      }).error(function(){
+        alert("Sucedió un error al eliminar")
+      });
+    }
+  }
 
 }]);
