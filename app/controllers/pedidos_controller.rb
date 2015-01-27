@@ -197,9 +197,9 @@ class PedidosController < ApplicationController
   def cambiar_estado
 
     if Pedido.estados.include?(params[:nuevo_estado]) and not ['ATENDIDO','ANULADO'].include?(@pedido.estado)
-      puts @pedido.estado
-      puts params[:nuevo_estado]
+
       @pedido.estado = params[:nuevo_estado]
+
     end
 
     respond_to do |format|
