@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126215415) do
+ActiveRecord::Schema.define(version: 20150128175852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20150126215415) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "tiempo_envio_aprox",  limit: 255
+    t.boolean  "delivery_habilitado"
+    t.boolean  "visible"
   end
 
   add_index "entidades", ["categoriaentidad_id"], name: "index_entidades_on_categoriaentidad_id", using: :btree

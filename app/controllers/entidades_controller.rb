@@ -4,7 +4,7 @@ class EntidadesController < ApplicationController
   # GET /entidades
   # GET /entidades.json
   def index
-    @entidades = Entidad.all
+    @entidades = Entidad.visibles.all
   end
 
   # GET /entidades/1
@@ -75,7 +75,7 @@ class EntidadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entidad_params
-      params.require(:entidad).permit(:nombre, :descripcion, :tiempo_envio_aprox, :costo_delivery, :pedido_minimo,:categoriaentidad_id,:avatar)
+      params.require(:entidad).permit(:nombre, :descripcion, :tiempo_envio_aprox, :costo_delivery, :pedido_minimo,:categoriaentidad_id,:avatar,:delivery_habilitado,:visible)
     end
 
     def solo_usuario_propio_or_admin

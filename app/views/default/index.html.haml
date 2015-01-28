@@ -21,3 +21,13 @@
 				=image_tag("promociones/5787_5ebfa0386f1b5b9d04b8a9f9360e163b.png")
 				=image_tag("promociones/5789_02cf6c22b80421800c7548c888a5cdaf.png")				
 		.large-2.columns
+.row
+	.large-12.columns
+		.recomendados
+			%h3.text-center
+				=fa_icon "cutlery"
+				Recomendados
+			.lista-entidades
+				- @entidades.each do |entidad|
+					=render "entidades/item_fila", entidad: entidad
+					%hr

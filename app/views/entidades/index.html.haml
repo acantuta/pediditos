@@ -8,25 +8,5 @@
     .columns.large-12
     .lista-entidades
       - @entidades.each do |entidad|
-        .row.entidad-item
-          .large-2.columns
-            %a.th.text-center
-              %img{:src=>entidad.avatar.url(:square)}
-          .large-7.columns
-            %h2=link_to entidad.nombre,entidad
-            %p=entidad.descripcion
-            .detalle-entidad
-              %ul.inline-list
-                %li
-                  Costo delivery
-                  =moneda(entidad.costo_delivery)
-                %li
-                  Monto mínimo del pedido
-                  =moneda(entidad.pedido_minimo)
-          .large-3.columns
-            =link_to "Pedir ahora",entidad,{class: "button warning radius"}
-        - if @usuario and entidad.usuario_puede_editar?(@usuario)
-          .row
-            .large-12.columns              
-              =link_to 'Editar',edit_entidad_path(entidad)
+        = render "entidades/item_fila", entidad: entidad
         %hr

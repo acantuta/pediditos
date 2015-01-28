@@ -1,0 +1,36 @@
+.row.entidad-item
+  .large-2.columns
+    %a.th.text-center
+      %img{:src=>entidad.avatar.url(:square)}
+  .large-7.columns
+    %h2=link_to entidad.nombre,entidad
+    
+    %p=entidad.descripcion
+    .detalle-entidad
+      %ul.inline-list
+        %li
+          Costo delivery
+          =moneda(entidad.costo_delivery)
+        %li
+          Monto mínimo del pedido
+          =moneda(entidad.pedido_minimo)            
+  .large-3.columns
+    - if entidad.delivery_habilitado 
+      %span.label.success.full-width 
+        =fa_icon "check"
+        Está aceptando pedidos ahora
+    - else
+      %span.label.alert.full-width
+        =fa_icon "close"
+        No está aceptando pedidos ahora    
+    - if entidad.delivery_habilitado 
+      =link_to "Pedir en línea",entidad,{class: "button success radius expand"}            
+    - else
+      =link_to "Ver menú",entidad,{class: "button alert radius expand"}           
+- if @usuario and entidad.usuario_puede_editar?(@usuario)
+  .row
+    .large-12.columns              
+      %a{href: edit_entidad_path(entidad)}
+        = fa_icon "edit"
+        editar
+      

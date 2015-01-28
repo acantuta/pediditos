@@ -23,5 +23,12 @@
     = f.label :pedido_minimo
     = f.number_field :pedido_minimo
   .field
+    = f.label "Delivery habilitado"
+    = f.check_box :delivery_habilitado
+  .field
+    = f.label "Visible en la web"
+    = f.check_box :visible
+  .field
+    = f.label 'Imagen a mostrar'
     = f.file_field :avatar
   %button Grabar

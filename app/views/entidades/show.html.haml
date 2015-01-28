@@ -16,6 +16,14 @@
   .row
     .large-8.columns
       %h2 La carta
+
+      /Acepta o no pedidos
+      - if @entidad.delivery_habilitado 
+        %span.success.full-width Está aceptando pedidos ahora
+      - else
+        %span.alert.full-width Este restaurant no está aceptando pedidos por ahora.
+
+      /grilla de productos de la entidad
       %ul.large-block-grid-2.medium-block-grid-2.small-block-grid-1
         %li.producto{"ng-repeat" => "producto in entidad.productos","ng-if"=>"producto.visible!=false"}
           %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
@@ -23,14 +31,26 @@
           %p.descripcion {{producto.descripcion}}
           .clearfix
           %div
-            %button.small{"ng-click"=>"agregar_producto(producto)"} + AGREGAR A PEDIDO
+            - if @entidad.delivery_habilitado 
+              %button.small{"ng-click"=>"agregar_producto(producto)"} + AGREGAR A PEDIDO
           .clearfix
           - if @usuario and (@usuario.es_admin? or @entidad.usuario_puede_editar?(@usuario))
             .opciones
-              %a{href: "/productos/{{producto.id}}/edit"} [Editar]
-              %a{"ng-click"=>"eliminar_producto(producto)"} [Eliminar]
-      - if @usuario and @entidad.usuario_puede_editar?(@usuario)
-        =link_to "+ Agregar producto",new_producto_path(producto: {entidad_id: @entidad.id})
+              %a{href: "/productos/{{producto.id}}/edit"}
+                =fa_icon "edit"
+                editar
+              %a{"ng-click"=>"eliminar_producto(producto)"}
+                =fa_icon "close"
+                Eliminar
+      %hr         
+        - if @usuario and @entidad.usuario_puede_editar?(@usuario)
+          %a{href: new_producto_path(producto: {entidad_id: @entidad.id})}
+            =fa_icon "plus"
+            Agregar producto
+        - if @usuario and @usuario.es_admin?          
+          %a{href: edit_entidad_path(@entidad.id)}
+            =fa_icon "edit"
+            editar entidad
 
     .large-4.columns
       .pedido_temporal.panel        
