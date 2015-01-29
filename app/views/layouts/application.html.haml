@@ -38,7 +38,9 @@
                 %li
                   =link_to :Usuarios,usuarios_path
                 %li
-                  =link_to :Pedidos,pedidos_path
+                  %a{href: pedidos_path}
+                    = fa_icon 'star'
+                    Pedidos
                 %li
                   =link_to "Nuevo Restaurante",new_entidad_path
               - if @usuario and @usuario.tiene_entidad?
@@ -104,7 +106,10 @@
                       %li
                         =link_to :Usuarios,usuarios_path
                       %li
-                        =link_to :Pedidos,pedidos_path
+                        
+                        %a{href: pedidos_path}
+                          = fa_icon 'star'
+                          Pedidos
                       %li
                         =link_to "Nuevo Restaurante",new_entidad_path
                     - if @usuario.tiene_entidad?
