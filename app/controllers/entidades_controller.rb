@@ -13,7 +13,8 @@ class EntidadesController < ApplicationController
     respond_to do |format|
       format.html
       format.json{
-        render :json => @entidad.to_json(:include => :productos)
+        render :json => @entidad.to_json(:include => [ 
+          :categoriaproductos => {:include=>[:productos]}])
       }
     end
   end
@@ -75,11 +76,11 @@ class EntidadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entidad_params
-      params.require(:entidad).permit(:nombre, :descripcion, :tiempo_envio_aprox, :costo_delivery, :pedido_minimo,:categoriaentidad_id,:avatar,:delivery_habilitado,:visible)
+      params.require(:entidad).permit(:nombre, :descripcion, :tiempo_envio_aprox, :costo_delivery, :pedido_minimo,:categoriaentidad_id,:avatar,:delivery_habilitado,:visible,:usuario_id)
     end
 
     def solo_usuario_propio_or_admin
-      if not ((@entidad.id == @usuario.entidad_id) or @usuario.es_admin?)
+      if not (  @entidad.usuario_puede_editar?( @usuario ) )
         if params[:format] != 'html'
           render text: 'Sin autorización',:status => :unautorized
         else

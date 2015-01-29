@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128175852) do
+ActiveRecord::Schema.define(version: 20150128233158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,9 +62,11 @@ ActiveRecord::Schema.define(version: 20150128175852) do
     t.string   "tiempo_envio_aprox",  limit: 255
     t.boolean  "delivery_habilitado"
     t.boolean  "visible"
+    t.integer  "usuario_id"
   end
 
   add_index "entidades", ["categoriaentidad_id"], name: "index_entidades_on_categoriaentidad_id", using: :btree
+  add_index "entidades", ["usuario_id"], name: "index_entidades_on_usuario_id", using: :btree
 
   create_table "pedidos", force: :cascade do |t|
     t.text     "comentario"
@@ -86,11 +88,13 @@ ActiveRecord::Schema.define(version: 20150128175852) do
     t.text     "descripcion"
     t.integer  "precio"
     t.integer  "entidad_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.datetime "deleted_at"
+    t.integer  "categoriaproducto_id"
   end
 
+  add_index "productos", ["categoriaproducto_id"], name: "index_productos_on_categoriaproducto_id", using: :btree
   add_index "productos", ["deleted_at"], name: "index_productos_on_deleted_at", using: :btree
   add_index "productos", ["entidad_id"], name: "index_productos_on_entidad_id", using: :btree
 
@@ -112,8 +116,10 @@ ActiveRecord::Schema.define(version: 20150128175852) do
   add_foreign_key "detallepedidos", "pedidos"
   add_foreign_key "detallepedidos", "productos"
   add_foreign_key "entidades", "categoriaentidades"
+  add_foreign_key "entidades", "usuarios"
   add_foreign_key "pedidos", "entidades"
   add_foreign_key "pedidos", "usuarios"
+  add_foreign_key "productos", "categoriaproductos"
   add_foreign_key "productos", "entidades"
   add_foreign_key "usuarios", "entidades"
 end

@@ -14,7 +14,7 @@ class CategoriaproductosController < ApplicationController
 
   # GET /categoriaproductos/new
   def new
-    @categoriaproducto = Categoriaproducto.new
+    @categoriaproducto = Categoriaproducto.new(categoriaproducto_params)
   end
 
   # GET /categoriaproductos/1/edit
@@ -28,7 +28,11 @@ class CategoriaproductosController < ApplicationController
 
     respond_to do |format|
       if @categoriaproducto.save
-        format.html { redirect_to @categoriaproducto, notice: 'Categoriaproducto was successfully created.' }
+
+        #Actualiza los anteriores productos a este nuevo grupo por defecto
+        Producto.where(entidad_id: @categoriaproducto.entidad_id, categoriaproducto_id: nil).update_all(categoriaproducto_id: @categoriaproducto.id)
+        
+        format.html { redirect_to entidad_path(@categoriaproducto.entidad_id) , notice: 'Categoriaproducto was successfully created.' }
         format.json { render :show, status: :created, location: @categoriaproducto }
       else
         format.html { render :new }

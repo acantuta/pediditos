@@ -1,8 +1,8 @@
 .row.entidad-item
-  .large-2.columns
+  .large-2.medium-3.columns
     %a.th.text-center
       %img{:src=>entidad.avatar.url(:square)}
-  .large-7.columns
+  .large-7.medium-9.columns
     %h2=link_to entidad.nombre,entidad
     
     %p=entidad.descripcion
@@ -14,7 +14,7 @@
         %li
           Monto mínimo del pedido
           =moneda(entidad.pedido_minimo)            
-  .large-3.columns
+  .large-3.medium-12.columns
     - if entidad.delivery_habilitado 
       %span.label.success.full-width 
         =fa_icon "check"

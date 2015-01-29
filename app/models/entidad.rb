@@ -1,6 +1,8 @@
 class Entidad < ActiveRecord::Base
 	belongs_to :categoriaentidad
+	belongs_to :usuario
 	has_many :productos
+	has_many :categoriaproductos
 
 	has_attached_file :avatar, styles: {
 	    thumb: '100x100>',
@@ -14,6 +16,6 @@ class Entidad < ActiveRecord::Base
   	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 	def usuario_puede_editar?(usuario)
-		(self.id==usuario.entidad_id or usuario.es_admin?)
+		(self.usuario_id == usuario.id or usuario.es_admin?)
 	end
 end

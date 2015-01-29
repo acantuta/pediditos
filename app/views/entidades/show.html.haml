@@ -3,9 +3,9 @@
   %a.close-reveal-modal &#215;
 .entidad{"ng-controller"=>"EntidadesController","ng-init"=>"entidad_id='#{@entidad.id}'"}
   .row
-    .large-2.columns.text-center
+    .large-2.medium-2.columns.text-center
       %img.th{src: @entidad.avatar.url(:thumb)}
-    .large-10.columns
+    .large-10.medium-10.columns
       %h1.nombre=@entidad.nombre
       %p=@entidad.descripcion
       %ul.atributos.inline-list
@@ -13,6 +13,8 @@
           .fa.fa-money="Pedido mínimo: {{#{@entidad.pedido_minimo} | moneda}}"
         %li
           .fa.fa-truck="Costo de envío: {{#{@entidad.costo_delivery} | moneda }}"
+
+  // Lista de productos de la entidad
   .row
     .large-8.columns
       %h2 La carta
@@ -23,35 +25,46 @@
       - else
         %span.alert.full-width Este restaurant no está aceptando pedidos por ahora.
 
-      /grilla de productos de la entidad
-      %ul.large-block-grid-2.medium-block-grid-2.small-block-grid-1
-        %li.producto{"ng-repeat" => "producto in entidad.productos","ng-if"=>"producto.visible!=false"}
-          %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
-          %span {{producto.nombre}}
-          %p.descripcion {{producto.descripcion}}
-          .clearfix
-          %div
+      .catergoriaproducto{'ng-repeat' => 'categoria in entidad.categoriaproductos'}
+        %h3 {{categoria.nombre}}
+        /grilla de productos de la entidad
+        %ul.large-block-grid-2.medium-block-grid-1.small-block-grid-1
+          %li.producto{"ng-repeat" => "producto in categoria.productos","ng-if"=>"producto.visible!=false"}
+            %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
+            %span {{producto.nombre}}
+            %p.descripcion {{producto.descripcion}}
+            .clearfix
+            
             - if @entidad.delivery_habilitado 
-              %button.small{"ng-click"=>"agregar_producto(producto)"} + AGREGAR A PEDIDO
-          .clearfix
-          - if @usuario and (@usuario.es_admin? or @entidad.usuario_puede_editar?(@usuario))
-            .opciones
-              %a{href: "/productos/{{producto.id}}/edit"}
-                =fa_icon "edit"
-                editar
-              %a{"ng-click"=>"eliminar_producto(producto)"}
-                =fa_icon "close"
-                Eliminar
+              %button.tiny{"ng-click"=>"agregar_producto(producto)"}
+                =fa_icon "plus"
+                AGREGAR A PEDIDO
+            .clearfix
+
+            // botones de administración de entidad
+            - if @usuario and (@usuario.es_admin? or @entidad.usuario_puede_editar?(@usuario))
+              .opciones
+                %a{href: "/productos/{{producto.id}}/edit"}
+                  =fa_icon "edit"
+                  editar
+                %a{"ng-click"=>"eliminar_producto(producto)"}
+                  =fa_icon "close"
+                  Eliminar
+        - if @usuario and @entidad.usuario_puede_editar?(@usuario)
+          %a{href: "/productos/new?categoriaproducto_id={{categoria.id}}&entidad_id={{entidad.id}}"} 
+            =fa_icon "plus"
+            Nuevo producto
+
       %hr         
         - if @usuario and @entidad.usuario_puede_editar?(@usuario)
-          %a{href: new_producto_path(producto: {entidad_id: @entidad.id})}
+          %a{href: new_categoriaproducto_path(categoriaproducto: {entidad_id: @entidad.id})}
             =fa_icon "plus"
-            Agregar producto
-        - if @usuario and @usuario.es_admin?          
-          %a{href: edit_entidad_path(@entidad.id)}
+            Nueva grupo                       
+          %a{href: edit_entidad_path( @entidad.id) }
             =fa_icon "edit"
-            editar entidad
+            editar restaurante
 
+    // Lado lateral derecho
     .large-4.columns
       .pedido_temporal.panel        
         %h2 Mi pedido

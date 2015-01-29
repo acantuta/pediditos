@@ -172,7 +172,7 @@ class PedidosController < ApplicationController
           when 'no-atendidos'
             @pedidos = Pedido.no_atendidos_sin_nuevo.all
           end
-          @pedidos = @pedidos.where(entidad_id: @usuario.entidad_id).all
+          @pedidos = @pedidos.where(usuario_id: @usuario.id).all
         else
           @pedidos = []
         end

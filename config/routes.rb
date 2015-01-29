@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       post 'cambiar-estado', action: :cambiar_estado
     end
   end
-
+  resources :categoriaproductos
   resources :productos
 
   resources :entidades,:path => :restaurantes

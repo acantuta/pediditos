@@ -48,14 +48,15 @@
               - if @usuario and @usuario.tiene_entidad?
                 %li
                   %a{"href"=>entidad_path(@usuario.entidad_id)}
-                    %strong MI RESTAURANTE
-                %li
-                  =link_to "Información", edit_entidad_path(@usuario.entidad_id)
+                    %strong MI RESTAURANTE                    
+                - @usuario.entidades.each do | entidad |
+                  %li
+                    %a{href: entidad_path(entidad.id)}
+                      = fa_icon "home"
+                      = entidad.nombre
                 %li
                   %a{href: '/pedidos'}
-                    Pedidos recibidos
-                %li
-                  =link_to "Agregar producto",new_producto_path(producto: {entidad_id: @usuario.entidad_id})
+                    Pedidos recibidos                
               %li
                 =link_to :Salir,'/usuarios/salir'
             - if not @usuario
@@ -100,21 +101,27 @@
                       %a
                         %strong MI CUENTA
                     %li
-                      =link_to "Información", edit_usuario_path(@usuario)
+
+                      %a{href: edit_usuario_path(@usuario)}
+                        = fa_icon "edit"
+                        Información
                     %li
-                      =link_to "Mis pedidos", '/yo/mis-pedidos'
+                      %a{href: '/yo/mis-pedidos'}
+                        =fa_icon "list"
+                        Mis pedidos
                     - if @usuario.tiene_entidad?
                       %li
                         %a
                           %strong MI RESTAURANTE
-                      %li
-                        =link_to "Información", edit_entidad_path(@usuario.entidad_id)
+                      - @usuario.entidades.each do | entidad |
+                        %li
+                          %a{href: entidad_path(entidad.id)}
+                            = fa_icon "home"
+                            = entidad.nombre
                       %li
                         %a{href: '/pedidos'}
+                          =fa_icon 'pencil'
                           Pedidos recibidos
-                      %li
-                        =link_to "Agregar producto",new_producto_path(producto: {entidad_id: @usuario.entidad_id})
-                      
                     %li
                       =link_to :Salir,'/usuarios/salir'
               - if not @usuario

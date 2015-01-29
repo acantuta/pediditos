@@ -7,6 +7,7 @@
           - @producto.errors.full_messages.each do |msg|
             %li= msg
     = f.hidden_field :entidad_id
+    = f.hidden_field :categoriaproducto_id
     .field
       = f.label :nombre
       = f.text_field :nombre

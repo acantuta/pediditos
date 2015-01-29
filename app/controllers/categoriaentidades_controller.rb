@@ -27,8 +27,9 @@ class CategoriaentidadesController < ApplicationController
   # POST /categoriaentidades
   # POST /categoriaentidades.json
   def create
+    
     @categoriaentidad = Categoriaentidad.new(categoriaentidad_params)
-
+  
     respond_to do |format|
       if @categoriaentidad.save
         format.html { redirect_to @categoriaentidad, notice: 'Categoriaentidad was successfully created.' }

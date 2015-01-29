@@ -1,6 +1,7 @@
 class Usuario < ActiveRecord::Base
 	include Redis::Objects
 	has_many :pedidos
+	has_many :entidades
 	has_secure_password
 	belongs_to :usuario
 
