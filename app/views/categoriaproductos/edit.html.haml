@@ -1,7 +1,7 @@
 .row.page-minimum
   .large-12.columns
-    %h1 Editing categoriaproducto
+    %h1 Editar grupo
 
     = render 'form'
     
-    = link_to 'Atras', categoriaproductos_path
+    = link_to 'Atras', entidad_path(@categoriaproducto.entidad_id)

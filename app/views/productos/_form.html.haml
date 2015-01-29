@@ -7,7 +7,7 @@
           - @producto.errors.full_messages.each do |msg|
             %li= msg
     = f.hidden_field :entidad_id
-    = f.hidden_field :categoriaproducto_id
+    = f.collection_select :categoriaproducto_id,  Categoriaproducto.where(entidad_id: @producto.entidad_id).all, :id, :nombre
     .field
       = f.label :nombre
       = f.text_field :nombre

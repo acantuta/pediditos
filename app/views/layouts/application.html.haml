@@ -24,7 +24,10 @@
               =image_tag "logo.svg",{class: "logo"}
         %aside.left-off-canvas-menu.show-for-small-only
           %ul.off-canvas-list
-            %li= link_to "INICIO",'/'
+            %li            
+              %a{href: "/"}
+                = fa_icon "home"
+                INICIO
             - if @usuario
               - if @usuario and @usuario.es_admin?
                 %li
@@ -38,25 +41,32 @@
                   =link_to :Pedidos,pedidos_path
                 %li
                   =link_to "Nuevo Restaurante",new_entidad_path
-              %li
-                %a
-                  %strong MI CUENTA
-              %li
-                =link_to "Información", edit_usuario_path(@usuario)
-              %li
-                =link_to "Mis pedidos", '/yo/mis-pedidos'
               - if @usuario and @usuario.tiene_entidad?
                 %li
-                  %a{"href"=>entidad_path(@usuario.entidad_id)}
-                    %strong MI RESTAURANTE                    
+                  %label 
+                    %a{"href"=>entidad_path(@usuario.entidad_id)}
+                      %strong MI RESTAURANTE                  
+                %li
+                  %a{href: '/pedidos'}
+                    =fa_icon "edit"
+                    Pedidos recibidos 
+                    =fa_icon 'star'
                 - @usuario.entidades.each do | entidad |
                   %li
                     %a{href: entidad_path(entidad.id)}
                       = fa_icon "home"
                       = entidad.nombre
-                %li
-                  %a{href: '/pedidos'}
-                    Pedidos recibidos                
+
+              %li
+                %label
+                  %a
+                    %strong MI USUARIO
+              %li
+                =link_to "Información", edit_usuario_path(@usuario)
+              %li
+                =link_to "Mis pedidos", '/yo/mis-pedidos'
+
+                               
               %li
                 =link_to :Salir,'/usuarios/salir'
             - if not @usuario
@@ -97,9 +107,24 @@
                         =link_to :Pedidos,pedidos_path
                       %li
                         =link_to "Nuevo Restaurante",new_entidad_path
+                    - if @usuario.tiene_entidad?
+                      %li
+                        %a
+                          %strong MI RESTAURANTE
+                      %li
+                        %a{href: '/pedidos'}
+                          =fa_icon 'pencil'
+                          Pedidos recibidos
+                          =fa_icon 'star'
+                      - @usuario.entidades.each do | entidad |
+                        %li
+                          %a{href: entidad_path(entidad.id)}
+                            = fa_icon "home"
+                            = entidad.nombre
+                      
                     %li
                       %a
-                        %strong MI CUENTA
+                        %strong MI USUARIO
                     %li
 
                       %a{href: edit_usuario_path(@usuario)}
@@ -109,19 +134,7 @@
                       %a{href: '/yo/mis-pedidos'}
                         =fa_icon "list"
                         Mis pedidos
-                    - if @usuario.tiene_entidad?
-                      %li
-                        %a
-                          %strong MI RESTAURANTE
-                      - @usuario.entidades.each do | entidad |
-                        %li
-                          %a{href: entidad_path(entidad.id)}
-                            = fa_icon "home"
-                            = entidad.nombre
-                      %li
-                        %a{href: '/pedidos'}
-                          =fa_icon 'pencil'
-                          Pedidos recibidos
+                    
                     %li
                       =link_to :Salir,'/usuarios/salir'
               - if not @usuario
