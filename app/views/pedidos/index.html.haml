@@ -2,7 +2,7 @@
   .large-12.columns
     %h1.text-center Pedidos
     %select{"ng-model"=>"estado"}
-      %option{"value" => '{{op.value}}',"ng-repeat"=>"op in [{name:'VER PEDIDOS - NO ATENDIDOS',value: 'no-atendidos'},{name: 'VER PEDIDOS - ATENDIDOS',value: 'atendidos'}]"} {{op.name}}
+      %option{"value" => '{{op.value}}',"ng-repeat"=>"op in [{name:'VER PEDIDOS - NO ATENDIDOS',value: 'no-atendidos'},{name: 'VER PEDIDOS - ATENDIDOS',value: 'atendidos'},{name: 'VER PEDIDOS - ANULADOS',value: 'anulados'}]"} {{op.name}}
     
     %span{"ng-if"=>"pedidos.length==0"} No tiene pedidos 
     %ul
