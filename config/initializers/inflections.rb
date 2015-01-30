@@ -11,6 +11,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 	inflect.irregular 'pedido', 'pedidos'
 	inflect.irregular 'detallepedido', 'detallepedidos'
 	inflect.irregular 'categoriaentidad', 'categoriaentidades'
+	inflect.irregular 'promocion', 'promociones'
 end
 
 # These inflection rules are supported but not enabled by default:

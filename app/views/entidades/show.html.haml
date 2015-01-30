@@ -12,6 +12,11 @@
             =fa_icon "cog"
         =@entidad.nombre
       %p=@entidad.descripcion
+      /Acepta o no pedidos
+      - if @entidad.delivery_habilitado 
+        %span.success.full-width Está aceptando pedidos ahora
+      - else
+        %span.alert.full-width Este restaurant no está aceptando pedidos por ahora.
       %ul.atributos.inline-list
         %li
           .fa.fa-money="Pedido mínimo: {{#{@entidad.pedido_minimo} | moneda}}"
@@ -26,19 +31,16 @@
     .large-8.columns
       Cargando...
   .row{"ng-if" => "!esta_cargando"}
-    .large-8.columns
+    .large-8.medium-8.columns
       %h2
         =fa_icon "cutlery"
-        La carta        
-      %a.right{href: new_categoriaproducto_path(categoriaproducto: {entidad_id: @entidad.id})}
+        La carta
+      - if @usuario and @entidad.usuario_puede_editar?(@usuario)
+        %a.right{href: new_categoriaproducto_path(categoriaproducto: {entidad_id: @entidad.id})}
         =fa_icon "plus-square"
         nuevo grupo
       .clearfix  
-      /Acepta o no pedidos
-      - if @entidad.delivery_habilitado 
-        %span.success.full-width Está aceptando pedidos ahora
-      - else
-        %span.alert.full-width Este restaurant no está aceptando pedidos por ahora.
+      
 
       .catergoriaproducto{'ng-repeat' => 'categoria in entidad.categoriaproductos'}
         %h3
@@ -51,7 +53,7 @@
         /grilla de productos de la entidad
         %ul.large-block-grid-2.medium-block-grid-1.small-block-grid-1
           %li.producto{"ng-repeat" => "producto in categoria.productos","ng-if"=>"producto.visible!=false"}
-            %span.precio.right.label.secondary.radius {{producto.precio | moneda}}
+            %span.precio.right.label.success.radius {{producto.precio | moneda}}
             %span
               // botones de administración de entidad
               - if @usuario and (@usuario.es_admin? or @entidad.usuario_puede_editar?(@usuario))
@@ -65,9 +67,9 @@
             .clearfix
             
             - if @entidad.delivery_habilitado 
-              %button.tiny{"ng-click"=>"agregar_producto(producto)"}
+              %button.tiny.secondary.radius.right{"ng-click"=>"agregar_producto(producto)"}
                 =fa_icon "plus"
-                AGREGAR A PEDIDO
+                PEDIR
             .clearfix
 
             
@@ -82,17 +84,17 @@
         
 
     // Lado lateral derecho
-    .large-4.columns
-      .pedido_temporal.panel        
+    .large-4.medium-4.columns
+      #pedido_temporal.pedido_temporal.panel
         %h2 Mi pedido
-        %ul.no-bullet
+        %ul.no-bullet.detalle_pedido
           %li{"ng-repeat"=>"detalle in pedido.detalles"}
             %div 
               .row
                 .large-12.columns
                   %span.right{"ng-click"=>"quitar_producto(detalle)"}=fa_icon 'close'
                   %span.nombre {{detalle.nombre}}
-                  %p {{detalle.descripcion}}
+                  %p.descripcion {{detalle.descripcion}}
               .row
                 .large-6.columns
                   .row.collapse
@@ -105,15 +107,24 @@
                 .large-6.columns
                   %span.right {{detalle.total | moneda}}
             %hr
-        .total
-          %span.right total: {{pedido.costo_total | moneda}}
-        .clearfix
+        .subtotal{"ng-if"=>"pedido.detalles.length>0"}
+          .divery
+            %span.right Delivery: {{entidad.costo_delivery | moneda}}
+          .clearfix   
+          .total
+            %span.right Total: {{pedido.costo_total | moneda}}
+          .clearfix
         %label
           Dirección de entrega(*):
           %em Ej. Av. José Olaya - San antonio.
           %input{'ng-model'=>'pedido.direccion_entrega',type: 'text',placeholder: "Dirección de entrega."}
         %textarea{placeholder: "Comentarios sobre mi pedido","ng-model"=>"pedido.comentario"}
         %button.button.success.expand{"data-reveal-id"=>"confirmacion-pedido","ng-disabled"=>"!es_pedido_valido()","ng-click"=>"confirmar_pedido();"} Hacer Pedido
-    
+  #franja-ver-mi-pedido.show-for-small-only.row{"ng-if"=>"es_visible_boton_ver_pedido()"}
+    .small-12.columns
+      %button.button.expand.warning{"ng-click"=>"ver_pedido()"}
+        =fa_icon 'shopping-cart'
+        Ver mi pedido
+        {{pedido.costo_total | moneda}}
 - content_for :javascript do
   =javascript_include_tag :entidades

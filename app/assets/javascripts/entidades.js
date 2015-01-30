@@ -17,6 +17,7 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
   $scope.pedido = Pedido;
   $scope.usuario = Usuario;
   $scope.esta_cargando = false;
+  $scope.pedido_es_visible = false;
   $scope.$watch("entidad_id",function(v){
   	Pedido.entidad_id = v;
     $scope.cargar_entidad();
@@ -31,7 +32,7 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
       $scope.esta_cargando = false;
 	  }).
 	  error(function(data, status, headers, config) {
-	    alert("Ha sucedido un error al cargar menu.");
+	    //alert("Ha sucedido un error al cargar menu.");
       $scope.esta_cargando = false;
 	});
   }
@@ -65,7 +66,8 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
       $scope.pedido.detalles[i].total = $scope.pedido.detalles[i].precio * $scope.pedido.detalles[i].cantidad;
   		total += $scope.pedido.detalles[i].precio * $scope.pedido.detalles[i].cantidad;
   	}
-  	$scope.pedido.costo_total = total;
+    var costo_total = total + $scope.entidad.costo_delivery;
+  	$scope.pedido.costo_total = costo_total;
   }
 
   $scope.cambio_cantidad = function(producto){
@@ -97,11 +99,30 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
   $scope.es_pedido_valido = function(){
     var r = false;
     if($scope.pedido && $scope.pedido.detalles.length>0){
-      if($scope.pedido.direccion_entrega.length>0){
+      if($scope.pedido.direccion_entrega && $scope.pedido.direccion_entrega.length>0){
         r = true;
       }
     }
     return r;
   }
 
+  $scope.ver_pedido = function(){
+    $('html, body').animate({
+        scrollTop: $("#pedido_temporal").offset().top
+    }, 1000);
+  }
+
+  $scope.init = function(){
+    
+    $(window).on('DOMContentLoaded load resize scroll', function(){
+      $scope.pedido_es_visible = $("#pedido_temporal").isOnScreen(0.4,0.4);
+      $scope.$apply();
+    }); 
+  }
+
+  $scope.es_visible_boton_ver_pedido = function(){
+    return (!$scope.pedido_es_visible 
+      && $scope.pedido && $scope.pedido.detalles.length>0);
+  }
+  $scope.init();
 }]);

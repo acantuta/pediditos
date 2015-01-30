@@ -1,0 +1,13 @@
+.row.minimum-page
+  .large-12
+    %p#notice= notice
+
+    %p
+      %b Link:
+      = @promocion.link
+    %p
+      =image_tag @promocion.avatar.url(:normal)
+
+    = link_to 'Editar', edit_promocion_path(@promocion)
+    \|
+    = link_to 'Atras', promociones_path

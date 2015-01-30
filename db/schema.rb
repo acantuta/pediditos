@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130052431) do
+ActiveRecord::Schema.define(version: 20150130160114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 20150130052431) do
   add_index "productos", ["categoriaproducto_id"], name: "index_productos_on_categoriaproducto_id", using: :btree
   add_index "productos", ["deleted_at"], name: "index_productos_on_deleted_at", using: :btree
   add_index "productos", ["entidad_id"], name: "index_productos_on_entidad_id", using: :btree
+
+  create_table "promociones", force: :cascade do |t|
+    t.string   "link"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "nombre_completo"

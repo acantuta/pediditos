@@ -73,7 +73,7 @@ header{
 	}
 	.pasos{
 		margin-bottom:10px;
-		font-weight: 400;
+		font-weight: 600;
 		text-transform: uppercase;
 		color:white;
 		font-size:16px;
@@ -111,6 +111,15 @@ header{
 		  font-size:0.9em;
 		}
 	}
+	#franja-ver-mi-pedido
+	{
+	position:fixed;
+	bottom:0px;
+		.button{
+		font-weight:600;
+		}
+	
+	}
 }
 .lista-entidades{
 	.entidad-item{
@@ -127,14 +136,27 @@ header{
 
 //pedidos
 .pedido_temporal{
+	font-size:0.9em;
 	.cantidad{
-		font-size:0.6em;
+		font-size:0.8em;
 	}
 	.nombre{
 	text-decoration: underline;
 	}
 	hr{
 		margin:.1rem 0 .1rem;
+	}
+	.detalle_pedido{
+		overflow-y:auto;
+		overflow-x:hidden;
+		max-height: 300px;
+		font-size:0.9em;
+		.descripcion{
+		font-size:0.85em;
+		}
+	}
+	.subtotal{
+	font-weight:500;
 	}
 }
 .loader{

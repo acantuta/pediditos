@@ -1,0 +1,16 @@
+= form_for @promocion do |f|
+  - if @promocion.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@promocion.errors.count, "error")} prohibited this promocion from being saved:"
+      %ul
+        - @promocion.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :link
+    = f.text_field :link
+  .field
+    = f.label :Avatar
+    = f.file_field :avatar
+  .actions
+    = f.submit 'Save',{class: 'button'}

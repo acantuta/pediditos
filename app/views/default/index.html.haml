@@ -2,25 +2,26 @@
 	.row.text-center
 		%h1.slogan PIDE TU COMIDA FAVORITA ONLINE
 	.row.pasos
-		.large-4.columns 
+		.large-4.medium-4.columns 
 			%span.pasos 1) Busca tu restaurante favorito
-		.large-4.columns
+		.large-4.medium-4.columns
 			%span.pasos 2) Pide lo que quieras de la carta
-		.large-4.columns
+		.large-4.medium-4.columns
 			%span.pasos 3) Haz tu delivery y paga en casa
 	.row
-		.large-1.columns .
-		.large-3.columns.detalle		
+		.large-1.medium-1.columns .
+		.large-3.medium-3.columns.detalle		
 			%h3 DIRECTORIO
-			%ul
+			%ul.no-bullet
 				- @categorias.each do |categoria|
 					%li=link_to(categoria.nombre,entidades_path)
 				%li=link_to "Ver todos",:entidades
-		.large-6.columns.detalle
+		.large-6.medium-6.columns.detalle
 			#promociones-principales{"data-orbit"=>true}
-				=image_tag("promociones/5787_5ebfa0386f1b5b9d04b8a9f9360e163b.png")
-				=image_tag("promociones/5789_02cf6c22b80421800c7548c888a5cdaf.png")				
-		.large-2.columns
+				- @promociones.each do | promocion |
+					= link_to( image_tag(promocion.avatar.url(:normal)), promocion.link )
+								
+		.large-2.medium-2.columns
 .row
 	.large-12.columns
 		.recomendados

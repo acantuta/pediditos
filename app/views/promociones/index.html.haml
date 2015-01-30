@@ -1,0 +1,23 @@
+.row.minimum-page
+  .large-12
+    %h1 Listing promociones
+
+    %table
+      %thead
+        %tr
+          %th Link
+          %th
+          %th
+          %th
+          
+      %tbody
+        - @promociones.each do |promocion|
+          %tr
+            %td= promocion.link
+            %td= link_to 'Show', promocion
+            %td= link_to 'Edit', edit_promocion_path(promocion)
+            %td= link_to 'Destroy', promocion, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    %br
+
+    = link_to 'New Promocion', new_promocion_path
