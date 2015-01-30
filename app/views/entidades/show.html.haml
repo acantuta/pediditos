@@ -22,7 +22,10 @@
             
 
   // Lista de productos de la entidad
-  .row
+  .row{"ng-if" => "esta_cargando"}
+    .large-8.columns
+      Cargando...
+  .row{"ng-if" => "!esta_cargando"}
     .large-8.columns
       %h2
         =fa_icon "cutlery"

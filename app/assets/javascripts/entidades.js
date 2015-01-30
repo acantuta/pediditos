@@ -16,6 +16,7 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
 
   $scope.pedido = Pedido;
   $scope.usuario = Usuario;
+  $scope.esta_cargando = false;
   $scope.$watch("entidad_id",function(v){
   	Pedido.entidad_id = v;
     $scope.cargar_entidad();
@@ -23,12 +24,15 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
 
   // Cargando restaurante y su detalle de productos.
   $scope.cargar_entidad = function(){
+    $scope.esta_cargando = true;
     $http.get('/restaurantes/'+$scope.entidad_id+".json").
 	  success(function(data, status, headers, config) {
 	    $scope.entidad = data;
+      $scope.esta_cargando = false;
 	  }).
 	  error(function(data, status, headers, config) {
 	    alert("Ha sucedido un error al cargar menu.");
+      $scope.esta_cargando = false;
 	});
   }
   
