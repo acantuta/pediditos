@@ -44,7 +44,7 @@
             %a{href: '/categoriaproductos/{{categoria.id}}/edit'}
               =fa_icon 'cog'
           {{categoria.nombre}}
-        %img{src: "{{categoria.avatar_url}}"}
+        %img{src: "{{categoria.avatar_url}}","ng-if"=>"categoria.avatar_url.length>0"}
         /grilla de productos de la entidad
         %ul.large-block-grid-2.medium-block-grid-1.small-block-grid-1
           %li.producto{"ng-repeat" => "producto in categoria.productos","ng-if"=>"producto.visible!=false"}
