@@ -5,9 +5,9 @@ class Entidad < ActiveRecord::Base
 	has_many :categoriaproductos
 
 	has_attached_file :avatar, styles: {
-	    thumb: '100x100>',
-	    square: '200x200>',
-	    medium: '300x300>'
+	    thumb: '100x100#',
+	    square: '200x200#',
+	    medium: '300x300#'
   	},:default_url => Rails.application.config.default_entidad_image
   	scope :visibles, -> { where(visible: true) }
   	default_scope{order(delivery_habilitado: :desc).order(updated_at: :desc)}
