@@ -20,7 +20,7 @@ class Pedido < ActiveRecord::Base
         if (self.estado_was == 'NUEVO' and 
           self.estado == 'PENDIENTE')
 
-          usu = Usuario.where(entidad_id: self.entidad_id).take
+          usu = Usuario.find(self.usuario_id)
           if usu
             usu.enviar_sms("Ha recibido un pedido de su restaurante en #{Rails.application.config.domain}")
           end
