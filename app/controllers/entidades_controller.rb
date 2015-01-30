@@ -14,7 +14,7 @@ class EntidadesController < ApplicationController
       format.html
       format.json{
         render :json => @entidad.to_json(:include => [ 
-          :categoriaproductos => {:include=>[:productos]}])
+          :categoriaproductos => {:include=>[:productos],:methods => [:avatar_url]}])
       }
     end
   end
