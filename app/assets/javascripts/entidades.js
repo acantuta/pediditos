@@ -90,4 +90,14 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
     }
   }
 
+  $scope.es_pedido_valido = function(){
+    var r = false;
+    if($scope.pedido && $scope.pedido.detalles.length>0){
+      if($scope.pedido.direccion_entrega.length>0){
+        r = true;
+      }
+    }
+    return r;
+  }
+
 }]);
