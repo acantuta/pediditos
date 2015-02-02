@@ -15,6 +15,12 @@ app.controller("ConfirmacionPedido",['$scope','$http','Pedido','Usuario',functio
     }
   });
 
+  $scope.$watch("identificacion.telefono", function(v){
+    if(v && v.length == 9){
+        $scope.enviar_sms();
+    }
+  });
+
 
   $scope.verificar_existencia_usuario = function(){
     $http({
