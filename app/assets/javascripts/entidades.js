@@ -115,7 +115,7 @@ app.controller('EntidadesController', ['$scope', '$http', 'Pedido', '$location',
   $scope.init = function(){
     
     $(window).on('DOMContentLoaded load resize scroll', function(){
-      $scope.pedido_es_visible = $("#pedido_temporal").isOnScreen(0.4,0.4);
+      $scope.pedido_es_visible = $("#pedido_temporal").isOnScreen(0.05,0.05);
       $scope.$apply();
     }); 
   }
