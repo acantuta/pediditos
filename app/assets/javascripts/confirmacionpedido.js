@@ -85,6 +85,7 @@ app.controller("ConfirmacionPedido",['$scope','$http','Pedido','Usuario',functio
   	  	$('#confirmacion-pedido').foundation('reveal', 'close');
   	  	Pedido.limpiar();
         Usuario.cargar();
+        alert("¡Se hizo el pedido exitosamente. Lo atenderemos lo más pronto posible!");
   	  }).error(function(data,status){        
   	  	if(data && data.flash){
   	  		$scope.flash = data.flash;
