@@ -87,6 +87,12 @@
     .large-4.medium-4.columns
       #pedido_temporal.pedido_temporal.panel
         %h2 Mi pedido
+        %label
+          Dirección de entrega(*):
+          %em Ej. Av. José Olaya - San antonio.
+          %input{'ng-model'=>'pedido.direccion_entrega',type: 'text',placeholder: "Dirección de entrega."}
+        %textarea{placeholder: "Comentarios sobre mi pedido","ng-model"=>"pedido.comentario"}
+        %button.button.success.expand{"data-reveal-id"=>"confirmacion-pedido","ng-disabled"=>"!es_pedido_valido()","ng-click"=>"confirmar_pedido();"} Hacer Pedido
         %ul.no-bullet.detalle_pedido
           %li{"ng-repeat"=>"detalle in pedido.detalles"}
             %div 
@@ -114,12 +120,7 @@
           .total
             %span.right Total: {{pedido.costo_total | moneda}}
           .clearfix
-        %label
-          Dirección de entrega(*):
-          %em Ej. Av. José Olaya - San antonio.
-          %input{'ng-model'=>'pedido.direccion_entrega',type: 'text',placeholder: "Dirección de entrega."}
-        %textarea{placeholder: "Comentarios sobre mi pedido","ng-model"=>"pedido.comentario"}
-        %button.button.success.expand{"data-reveal-id"=>"confirmacion-pedido","ng-disabled"=>"!es_pedido_valido()","ng-click"=>"confirmar_pedido();"} Hacer Pedido
+        
   #franja-ver-mi-pedido.show-for-small-only.row{"ng-if"=>"es_visible_boton_ver_pedido()"}
     .small-12.columns
       %button.button.expand.warning{"ng-click"=>"ver_pedido()"}
