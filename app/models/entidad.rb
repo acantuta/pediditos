@@ -3,6 +3,7 @@ class Entidad < ActiveRecord::Base
 	belongs_to :usuario
 	has_many :productos
 	has_many :categoriaproductos
+	has_many :pedidos
 
 	has_attached_file :avatar, styles: {
 	    thumb: '100x100#',
