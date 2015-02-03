@@ -13,14 +13,23 @@ class Pedido < ActiveRecord::Base
   scope :no_atendidos_sin_nuevo, -> { where(estado: ['PENDIENTE','ATENDIENDO','REPARTIENDO']) }
 
   after_save :after_grabar
+  before_save :before_grabar
 
-  def after_grabar
+  def before_grabar
+    if self.new_record?
+      usu_admin = Usuario.find(Rails.application.config.usuario_id_admin)
+      usu_admin.enviar_sms("Hay un pedido nuevo en #{Rails.application.config.domain}")
+    end
+  end
+
+  def after_grabar    
+
     if self.changed?
       if self.estado_changed?
         if (self.estado_was == 'NUEVO' and 
           self.estado == 'PENDIENTE')
-
-          usu = Usuario.find(self.usuario_id)
+          enti = Entidad.find(self.entidad_id)
+          usu = Usuario.find(enti.usuario_id) if enti.usuario_id          
           if usu
             usu.enviar_sms("Ha recibido un pedido de su restaurante en #{Rails.application.config.domain}")
           end
