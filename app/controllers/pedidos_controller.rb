@@ -155,27 +155,25 @@ class PedidosController < ApplicationController
           @pedidos = Pedido.no_atendidos.all
         end
     else
-        if @usuario.tiene_entidad?
+        
           case params[:tipo]
           when 'nuevos' 
-            @pedidos = Pedido.nuevos.all
+            @pedidos = Pedido.nuevos
           when 'pendientes'
-            @pedidos = Pedido.pendientes.all
+            @pedidos = Pedido.pendientes
           when 'atendiendo'
-            @pedidos = Pedido.atendiendo.all
+            @pedidos = Pedido.atendiendo
           when 'repartiendo'
-            @pedidos = Pedido.repartiendo.all
+            @pedidos = Pedido.repartiendo
           when 'atendidos'
-            @pedidos = Pedido.atendidos.all
+            @pedidos = Pedido.atendidos
           when 'anulados'
-            @pedidos = Pedido.anulados.all
+            @pedidos = Pedido.anulados
           when 'no-atendidos'
-            @pedidos = Pedido.no_atendidos_sin_nuevo.all
+            @pedidos = Pedido.no_atendidos_sin_nuevo
           end
           @pedidos = @pedidos.where(usuario_id: @usuario.id).all
-        else
-          @pedidos = []
-        end
+        
     end
     
     respond_to do |format|      
