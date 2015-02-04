@@ -22,6 +22,9 @@
           .fa.fa-money="Pedido mínimo: {{#{@entidad.pedido_minimo} | moneda}}"
         %li
           .fa.fa-truck="Costo de envío: {{#{@entidad.costo_delivery} | moneda }}"
+        - if @entidad.telefono
+          %li
+            .fa.fa-phone-square="Teléfono: #{@entidad.telefono}"
 
           
             

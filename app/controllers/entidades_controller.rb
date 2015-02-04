@@ -76,7 +76,7 @@ class EntidadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entidad_params
-      params.require(:entidad).permit(:nombre, :descripcion, :tiempo_envio_aprox, :costo_delivery, :pedido_minimo,:categoriaentidad_id,:avatar,:delivery_habilitado,:visible,:usuario_id)
+      params.require(:entidad).permit(:nombre, :descripcion, :tiempo_envio_aprox, :costo_delivery, :pedido_minimo,:categoriaentidad_id,:avatar,:delivery_habilitado,:visible,:usuario_id,:telefono)
     end
 
     def solo_usuario_propio_or_admin

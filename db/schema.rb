@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130160114) do
+ActiveRecord::Schema.define(version: 20150204043359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20150130160114) do
     t.boolean  "delivery_habilitado"
     t.boolean  "visible"
     t.integer  "usuario_id"
+    t.string   "telefono"
   end
 
   add_index "entidades", ["categoriaentidad_id"], name: "index_entidades_on_categoriaentidad_id", using: :btree
