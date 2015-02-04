@@ -4,7 +4,13 @@
     %meta{:charset => "utf-8"}
     %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"}
 
-    %title="#{Rails.application.config.titulo_principal}"
+    %title
+      - if content_for? :title
+        = content_for :title
+        = " - #{@nombre_sitio}"
+      - else
+        ="#{Rails.application.config.titulo_principal}"
+      
     =stylesheet_link_tag "application"
     =stylesheet_link_tag"http://fonts.googleapis.com/css?family=Roboto:300,700,500italic,900,300italic,400italic,900italic,100italic,100,500,400,700italic"
     
