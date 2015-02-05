@@ -18,6 +18,6 @@
       = f.hidden_field :precio
     .field
       = f.label :precio
-      = number_field_tag :producto_precio_mascara,@producto.precio_mascara
+      = number_field_tag :producto_precio_mascara,@producto.precio_mascara, :step => 0.1
     .actions
       = f.submit 'Guardar',{class: "button"}
