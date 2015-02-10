@@ -1,21 +1,39 @@
-%p#notice= notice
+.row.minimum-page{"ng-controller"=>"PedidoController","ng-init"=>"pedido_id='#{@pedido.id}'"}
+  .large-12.columns
+    %h4 
+      %a{href: "/pedidos/{{pedido.id}}"}
+        PEDIDO N° {{pedido.id}}
+      %small Fecha: {{pedido.created_at | date: 'dd/MM/yyyy HH:mm'}}
+    %div CLIENTE: {{pedido.usuario.nombre_completo}}
+    %div DIRECCION DE ENTREGA: {{pedido.direccion_entrega}}
+    %div DNI: {{pedido.usuario.dni}}
+    %div TELEFONO: {{pedido.usuario.telefono}}
+    %div COMENTARIO: {{pedido.comentario}}
 
-%p
-  %b Comentario:
-  = @pedido.comentario
-%p
-  %b Direccion entrega:
-  = @pedido.direccion_entrega
-%p
-  %b Costo total:
-  = @pedido.costo_total
-%p
-  %b Usuario:
-  = @pedido.usuario
-%p
-  %b Entidad:
-  = @pedido.entidad
-
-= link_to 'Edit', edit_pedido_path(@pedido)
-\|
-= link_to 'Back', pedidos_path
+    %table{width: '100%'}
+      %tr
+        %td.text-center PRODUCTO
+        %td.text-center CANTIDAD
+        %td.text-center COSTO
+        %td.text-center TOTAL
+      
+      %tr{"ng-repeat"=>"detalle in pedido.detallepedidos"}
+        %td {{detalle.producto.nombre}}
+        %td.text-right {{detalle.cantidad}}
+        %td.text-right {{detalle.costo_unit | moneda}}
+        %td.text-right {{detalle.costo_total | moneda}}
+      %tr
+        %td{'colspan'=>"3"}
+        %td.text-right
+          %strong {{pedido.costo_total | moneda}}
+    %div
+      Estado: 
+      %select.large-2{"ng-model"=>"pedido.estado", "ng-change"=>"cambiar_estado_pedido(pedido,pedido.estado)"}
+        %option{"ng-repeat"=>"estado in ['NUEVO','PENDIENTE','ATENDIENDO','REPARTIENDO','ATENDIDO','ANULADO']"}{{estado}}
+    %hr
+    
+- content_for :javascript do  
+  =javascript_include_tag "https://cdn.firebase.com/js/client/2.0.4/firebase.js"
+  =javascript_include_tag "https://cdn.firebase.com/libs/angularfire/0.9.2/angularfire.min.js"
+  =javascript_include_tag "pedido"
+  

@@ -13,7 +13,15 @@ class PedidosController < ApplicationController
   # GET /pedidos/1
   # GET /pedidos/1.json
   def show
-
+    respond_to do |format|
+      format.html
+      format.json{
+        render :json => @pedido, :include => [:usuario,:detallepedidos=>{
+                :include => [:producto=>{
+                only: [:nombre,:descripcion]
+                }]}]
+      }
+    end
   end
 
   # GET /pedidos/new

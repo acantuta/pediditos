@@ -8,7 +8,8 @@
     %ul
       .item-pedido{"ng-repeat" => "pedido in pedidos","ng-if"=>"pedido.visible!=false"}
         %h4 
-          PEDIDO N° {{pedido.id}}
+          %a{href: "/pedidos/{{pedido.id}}"}
+            PEDIDO N° {{pedido.id}}
           %small Fecha: {{pedido.created_at | date: 'dd/MM/yyyy HH:mm'}}
         %div CLIENTE: {{pedido.usuario.nombre_completo}}
         %div DIRECCION DE ENTREGA: {{pedido.direccion_entrega}}
