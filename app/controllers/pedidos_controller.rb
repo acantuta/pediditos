@@ -1,6 +1,6 @@
 class PedidosController < ApplicationController
   before_action :set_pedido, only: [:show, :edit, :update, :destroy,:cambiar_estado]
-  before_action :solo_usuario, except: [:confirmacion,:create]
+  before_action :solo_usuario, except: [:confirmacion, :create, :show]
   # GET /pedidos
   # GET /pedidos.json
   def index
