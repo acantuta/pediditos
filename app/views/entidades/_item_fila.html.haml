@@ -9,11 +9,18 @@
     .detalle-entidad
       %ul.inline-list
         %li
-          Costo delivery
-          =moneda(entidad.costo_delivery)
+          %span
+            Costo delivery
+            =moneda(entidad.costo_delivery)
         %li
-          Monto mínimo del pedido
-          =moneda(entidad.pedido_minimo)            
+          %span
+            Monto mínimo del pedido
+            =moneda(entidad.pedido_minimo)
+        - unless entidad.telefono.blank?
+          %li
+            %span
+              %i.fa.fa-phone
+              =entidad.telefono
   .large-3.medium-12.columns
     - if entidad.delivery_habilitado 
       %span.label.success.full-width 
